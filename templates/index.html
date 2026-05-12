@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TSLA Stock Analysis</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        img {
+            width: 1000px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>TSLA Stock Analysis</h1>
+
+    <h2>Monthly Change Graph</h2>
+
+    <img src="{{ url_for('static', filename='graph.png') }}">
+
+    <h2>Recent Data</h2>
+
+    {{ table|safe }}
+
+</body>
+</html>
