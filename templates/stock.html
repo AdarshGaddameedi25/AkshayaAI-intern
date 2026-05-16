@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{{ stock_name }} Dashboard</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        img {
+            width: 1000px;
+            margin-bottom: 30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    
+
+    <div>
+
+        <a href="/">Home</a> |
+
+        <a href="/tsla">TSLA</a> |
+
+        <a href="/aapl">AAPL</a> |
+
+        <a href="/msft">MSFT</a>
+
+    </div>
+
+    <br>
+
+    <!-- Page Heading -->
+
+    <h1>{{ stock_name }} Stock Dashboard</h1>
+
+    <!-- Graph -->
+
+    <img
+        src="{{ url_for('static', filename=stock_name.lower() + '_graph.png') }}"
+    >
+
+    <!-- Table -->
+
+    {{ table|safe }}
+
+</body>
+
+</html>
