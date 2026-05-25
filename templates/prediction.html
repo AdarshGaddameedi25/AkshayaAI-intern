@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{{ stock_name }} Prediction Dashboard</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        img {
+            width: 1000px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div>
+
+        <a href="/">Home</a> |
+
+        <a href="/tsla">TSLA</a> |
+
+        <a href="/aapl">AAPL</a> |
+
+        <a href="/msft">MSFT</a>
+
+    </div>
+
+    <h1>{{ stock_name }} Prediction Dashboard</h1>
+
+    {% if error %}
+
+        <p>{{ error }}</p>
+
+    {% else %}
+
+        <p>Best model: {{ best_model }}</p>
+
+        <p>Best next-day close prediction: {{ best_prediction }}</p>
+
+        <img src="{{ url_for('static', filename=graph_file) }}">
+
+        <h2>Model Comparison</h2>
+
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>MAE</th>
+                <th>RMSE</th>
+                <th>R² Score</th>
+            </tr>
+            {% for row in metrics %}
+            <tr>
+                <td>{{ row.model }}</td>
+                <td>{{ row.mae }}</td>
+                <td>{{ row.rmse }}</td>
+                <td>{{ row.r2 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Next-Day Predictions</h2>
+
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>Predicted Close</th>
+            </tr>
+            {% for model_name, prediction in next_day_predictions.items() %}
+            <tr>
+                <td>{{ model_name }}</td>
+                <td>{{ prediction }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    {% endif %}
+
+</body>
+
+</html>
